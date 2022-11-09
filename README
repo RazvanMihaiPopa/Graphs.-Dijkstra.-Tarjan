@@ -1,0 +1,51 @@
+Tema 3 - SDA
+
+Cerinta 1:
+Verificand ca am primit de la stdin "e1", declar pentru drumul spre
+magazin si cel inapoi spre depozit si apelez pentru fiecare drum
+functia Dijkstra_Algorithm, care se bazeaza pe aflarea costului minim
+intre 2 noduri. Pentru a afla drumul, functia Dijkstra_path returneaza
+o lista care contine nodurile care formeaza drumul. In totalcost
+se retine costul total al drumului.
+
+Functia Dijkstra are ca parametrii graful, nodul sursa, vectorul
+dist in care se retin distantele si prev care retine calea. Luam un
+vector unvisited pentru a tine cont de nodurile vizitate. Initializam
+vectorii, pe cel de distante cu infinit(valoare maxima), pe cel de
+vizitari cu -1 si pe cel de cale cu 0. Distanta de la sursa catre
+ea insasi este 0. Apoi, aplicam algoritmul, tinand cont de vizitari.
+Functia Dijkstra_path lucreaza cu vectorul prev, si pornind de la
+nodul in care vrem sa ajungem, vrem ca pozitia pe care ne aflam la
+final sa aiba valoarea sursei.
+
+Cerinta 2:
+Pentru a afla componentele tare conexe, am folosit algoritmul Tarjan,
+care se foloseste de parcurgerea DFS. Am retinut componentele conexe
+in lista SCCs, separandu-le prin -1. Am sortat fiecare componenta
+pe care am bagat-o intr-o lista sortata si dupa fiecare am adaugat -1,
+pentru a le diferentia si am retinut in variabila max numarul maxim
+de elemente pe care le are o componenta. Am initializat o matrice
+cu numarul liniilor fiind numarul de componente tare conexe si
+coloanele cu maximul aflat. Apoi am luat doi vectori, lines in care
+retin primul element din fiecare componenta si index pentru
+indexul din matrice, sortandu-le apoi. Apoi, am printat in functie 
+de indexul de sortare.
+
+Cerinta 3:
+Pentru rezolvare m-am folosit de hint si am creat functia 
+Dijkstra_Modified, care retine starea traseului folosindu-se de o masca.
+Matricea/vectorul de distante este initializat cu infinit. 
+Nodul sursa are masca si costul 0 si il adaugam in structura de tip
+currstore_t care contine ID-ul magazinului, masca si costul. Introducem
+structura intr-o coada. Cat timp coada nu e goala, luam structura cu
+costul cel mai mic si o eliminam din coada. Am folosit o coada normala
+si am facut o functie care seteaza nodul minim ca queue->tail (practic
+primul nod din coada), dandu-i apoi dequeue, functionand ca o coada de
+prioritati (prioritate avand costul minim). Pentru fiecare copil, 
+verificam daca face parte din componenta conexa sau depozit si actualizam
+distanta minima. Daca face parte din componenta conexa, masca va contine
+magazinul prin care am trecut.
+In main, visitedmask este masca care indica ca am trecut prin toata
+componenta conexa. Pentru fiecare depozit calculam costul folosind
+Dijkstra_Modified si in cost va fi retinut costul minim. 
+
